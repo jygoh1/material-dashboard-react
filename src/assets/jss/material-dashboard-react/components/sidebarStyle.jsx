@@ -64,7 +64,7 @@ const sidebarStyle = theme => ({
   logoLink: {
     ...defaultFont,
     textTransform: "uppercase",
-    padding: "5px 0",
+    padding: "5px 0px",	// 2 properties is (top/bot), (left/right)
     display: "block",
     fontSize: "18px",
     textAlign: "left",
@@ -80,12 +80,12 @@ const sidebarStyle = theme => ({
     width: "30px",
     display: "inline-block",
     maxHeight: "30px",
-    marginLeft: "10px",
-    marginRight: "15px"
+    marginLeft: "18px",
+    marginRight: "23px"
   },
   img: {
-    width: "35px",
-    top: "22px",
+    width: "26px",
+    top: "22.5px",
     position: "absolute",
     verticalAlign: "middle",
     border: "0"

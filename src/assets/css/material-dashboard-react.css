@@ -105,6 +105,7 @@ h6 {
 body {
     background-color: #EEEEEE;
     color: #3C4858;
+	overflow: hidden;
 }
 
 blockquote p {

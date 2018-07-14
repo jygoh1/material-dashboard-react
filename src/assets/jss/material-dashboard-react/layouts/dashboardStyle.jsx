@@ -8,19 +8,22 @@ const appStyle = theme => ({
   wrapper: {
     position: "relative",
     top: "0",
-    height: "100vh"
+    height: "100vh",
+	overflow: "hidden",
   },
   mainPanel: {
     [theme.breakpoints.up("md")]: {
       width: `calc(100% - ${drawerWidth}px)`
     },
-    overflow: "auto",
+    // overflow: "auto",
+	overflow: "hidden",
     position: "relative",
     float: "right",
     ...transition,
     maxHeight: "100%",
     width: "100%",
-    overflowScrolling: "touch"
+    // overflowScrolling: "touch",
+	// paddingBottom: "100px"
   },
   content: {
     marginTop: "70px",
@@ -29,7 +32,10 @@ const appStyle = theme => ({
   },
   container,
   map: {
-    marginTop: "70px"
+    // marginTop: "70px",
+    // marginTop: "0",
+	// paddingBottom: "100px",
+	// height: "75%"
   }
 });
 

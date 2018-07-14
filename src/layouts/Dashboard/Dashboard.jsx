@@ -9,7 +9,6 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import Header from "components/Header/Header.jsx";
-import Footer from "components/Footer/Footer.jsx";
 import Sidebar from "components/Sidebar/Sidebar.jsx";
 
 import dashboardRoutes from "routes/dashboard.jsx";
@@ -18,13 +17,24 @@ import dashboardStyle from "assets/jss/material-dashboard-react/layouts/dashboar
 
 import image from "assets/img/sidebar-2.jpg";
 import logo from "assets/img/reactlogo.png";
+import airportlogo from "assets/img/changiairportlogo.png";
+
+// const switchRoutes = (
+  // <Switch>
+    // {dashboardRoutes.map((prop, key) => {
+      // if (prop.redirect)
+        // return <Redirect from={prop.path} to={prop.to} key={key} />;
+      // return <Route path={prop.path} component={prop.component} key={key} />;
+    // })}
+  // </Switch>
+// );
 
 const switchRoutes = (
   <Switch>
     {dashboardRoutes.map((prop, key) => {
       if (prop.redirect)
         return <Redirect from={prop.path} to={prop.to} key={key} />;
-      return <Route path={prop.path} component={prop.component} key={key} />;
+      return <Route exact path={prop.path} render={() => <prop.component terminal={prop.terminal} level={prop.level} camera={prop.camera} />} key={key} />;
     })}
   </Switch>
 );
@@ -37,7 +47,8 @@ class App extends React.Component {
     this.setState({ mobileOpen: !this.state.mobileOpen });
   };
   getRoute() {
-    return this.props.location.pathname !== "/maps";
+	  return false;
+    // return this.props.location.pathname !== "/maps";
   }
   componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -58,8 +69,8 @@ class App extends React.Component {
       <div className={classes.wrapper}>
         <Sidebar
           routes={dashboardRoutes}
-          logoText={"Creative Tim"}
-          logo={logo}
+          logoText={"SW7"}
+          logo={airportlogo}
           image={image}
           handleDrawerToggle={this.handleDrawerToggle}
           open={this.state.mobileOpen}
@@ -67,12 +78,6 @@ class App extends React.Component {
           {...rest}
         />
         <div className={classes.mainPanel} ref="mainPanel">
-          <Header
-            routes={dashboardRoutes}
-            handleDrawerToggle={this.handleDrawerToggle}
-            {...rest}
-          />
-          {/* On the /maps route we want the map to be on full screen - this is not possible if the content and conatiner classes are present because they have some paddings which would make the map smaller */}
           {this.getRoute() ? (
             <div className={classes.content}>
               <div className={classes.container}>{switchRoutes}</div>
@@ -80,7 +85,6 @@ class App extends React.Component {
           ) : (
             <div className={classes.map}>{switchRoutes}</div>
           )}
-          {this.getRoute() ? <Footer /> : null}
         </div>
       </div>
     );

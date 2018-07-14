@@ -1,0 +1,27 @@
+main html file: "public/index.html"
+- only has <div id="root"> in body
+
+main js file: "src/index.js"
+- renders a set of Router with indexRoutes - individual Routes with path and component properties (map with key is indexed by default) at <div id="root">
+
+indexRoutes from "routes/index.jsx"
+- imports Dashboard and exports it as a Route with path "/" (homepage) and component Dashboard
+
+Dashboard from "layouts/Dashboard/Dashboard.jsx"
+- renders the main dashboard page
+- imports components Sidebar, Header, Footer
+- Header, Footer enclosed in a <div className={classes.mainPanel}>
+- imports dashboardRoutes from "routes/dashboard.jsx", which are passed into Sidebar and Header
+
+dashboardRoutes from "routes/dashboard.jsx"
+- contains array of possible paths with display name, navbarName (header navigation), icon (from @material-ui) and component pages taken from "views/..." (e.g. "views/Dashboard/Dashboard.jsx")
+
+Sidebar from "components/Sidebar/Sidebar.jsx" (Header and Footer also from "components" folder)
+- takes props: classes, color, logo, image, logoText, routes (all included in "layouts/Dashboard/Dashboard.jsx" except classes)
+
+Header from "components/Header/Header.jsx"
+- links taken from "components/Header/HeaderLinks.jsx"
+
+individual views e.g. "views/Dashboard/Dashboard.jsx"
+- renders everything shown whenever Dashboard component is called, with "dashboardStyle" applied
+- stuff in the dashboard is arranged in terms of <Grid>s containing some number of <GridItem>, each of which contains a <Card> which can have a <CardHeader>, <CardBody> and <CardFooter>, inside of which can be individually-defined <div>s

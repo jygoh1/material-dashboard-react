@@ -1,0 +1,73 @@
+import React from "react";
+
+import ReactDOM from "react-dom";
+
+import Button from "@material-ui/core/Button";
+
+
+// -------------------------------------------------
+// arrows are a function shorthand using the => syntax
+// unlike functions, these share the same lexical "this" as their surrounding code
+
+const App = (props) => (
+
+	<Button variant="raised" color="primary">
+
+		Hello World
+
+		{props.title}
+	</Button>
+
+);
+
+
+
+// --------------- is equivalent to the following function call ---------------
+
+function App2(props){
+
+	return(
+
+		<Button variant="raised" color="primary">
+
+			Hello World
+
+			{props.title}
+		</Button>
+ 
+	);
+
+}
+
+// --------------- has the same results as ---------------
+// using an ES6 class to define a component (to React, these are the same)
+
+class App extends React.Component{
+
+	render(props){
+
+		return(
+
+			<div>
+
+				<Button variant="raised" color="primary">
+
+					Hello World
+					{this.props.title}
+
+				</Button>
+
+			</div>
+
+		)
+
+	}
+
+}
+
+// -------------------------------------------------
+
+
+ReactDOM.render(<App title="HELLO"/>, document.querySelector("#app"));
+
+ReactDOM.render(<App2 title="HELLO"/>, document.querySelector("#app2"));

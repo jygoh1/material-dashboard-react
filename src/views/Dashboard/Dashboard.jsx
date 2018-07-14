@@ -31,6 +31,8 @@ import CardIcon from "components/Card/CardIcon.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 import CardFooter from "components/Card/CardFooter.jsx";
 
+import Map from "components/Map/Map.jsx";
+
 import { bugs, website, server } from "variables/general";
 
 import {
@@ -41,10 +43,20 @@ import {
 
 import dashboardStyle from "assets/jss/material-dashboard-react/views/dashboardStyle.jsx";
 
+
+// MY OWN STUFF
+import ReactPlayer from 'react-player';
+import videoStyle from "assets/css/videoStyle.jsx";
+
+// video-react - https://video-react.js.org/components/player/
+import { Player, ControlBar, ReplayControl, ForwardControl, PlaybackRateMenuButton } from 'video-react';
+
+
 class Dashboard extends React.Component {
   state = {
     value: 0
   };
+  
   handleChange = (event, value) => {
     this.setState({ value });
   };
@@ -52,10 +64,32 @@ class Dashboard extends React.Component {
   handleChangeIndex = index => {
     this.setState({ value: index });
   };
+  
   render() {
     const { classes } = this.props;
+	
     return (
       <div>
+	  
+        <Grid container>
+          <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="success">
+				Woodlands Checkpoint
+              </CardHeader>
+              <CardBody>
+				<Map />
+              </CardBody>
+              <CardFooter>
+                <div className={classes.stats}>
+                  <AccessTime /> updated 4 minutes ago
+                </div>
+              </CardFooter>
+            </Card>
+          </GridItem>
+		</Grid>
+		 
+		 
         <Grid container>
           <GridItem xs={12} sm={6} md={3}>
             <Card>
@@ -132,34 +166,57 @@ class Dashboard extends React.Component {
             </Card>
           </GridItem>
         </Grid>
+		
+		
         <Grid container>
-          <GridItem xs={12} sm={12} md={4}>
-            <Card chart>
+          <GridItem xs={12} sm={12} md={6}>
+            <Card>
               <CardHeader color="success">
-                <ChartistGraph
-                  className="ct-chart"
-                  data={dailySalesChart.data}
-                  type="Line"
-                  options={dailySalesChart.options}
-                  listener={dailySalesChart.animation}
-                />
+				Woodlands Checkpoint
               </CardHeader>
               <CardBody>
-                <h4 className={classes.cardTitle}>Daily Sales</h4>
-                <p className={classes.cardCategory}>
-                  <span className={classes.successText}>
-                    <ArrowUpward className={classes.upArrowCardCategory} /> 55%
-                  </span>{" "}
-                  increase in today sales.
-                </p>
+				<div className={videoStyle.playerWrapper}>
+					<ReactPlayer
+					  className={videoStyle.reactPlayer}
+					  url='https://www.youtube.com/watch?v=ysz5S6PUM-U'
+					  width='100%'
+					  height='35vh'
+					/>
+				</div>
               </CardBody>
-              <CardFooter chart>
+              <CardFooter>
                 <div className={classes.stats}>
                   <AccessTime /> updated 4 minutes ago
                 </div>
               </CardFooter>
             </Card>
           </GridItem>
+          <GridItem xs={12} sm={12} md={6}>
+            <Card>
+				<div>
+					<Player
+					  aspectRatio="16:9"
+					  autoPlay={false}
+					  // poster="/assets/poster.png"
+					  src="http://media.w3.org/2010/05/bunny/movie.mp4"
+					  BigPlayButton position="center"
+					>	
+					  <ControlBar autoHide={false}>
+						<ReplayControl seconds={10} order={2.1} />
+						<ForwardControl seconds={10} order={3.1} />
+						<PlaybackRateMenuButton
+						  rates={[5, 2, 1.5, 1, 0.5, 0.25]}
+						  order={7.1}
+						/>
+					  </ControlBar>
+					</Player>
+				</div>
+            </Card>
+          </GridItem>
+		 </Grid>
+		 
+		 
+		 <Grid container>
           <GridItem xs={12} sm={12} md={4}>
             <Card chart>
               <CardHeader color="warning">
@@ -210,6 +267,7 @@ class Dashboard extends React.Component {
             </Card>
           </GridItem>
         </Grid>
+		
         <Grid container>
           <GridItem xs={12} sm={12} md={6}>
             <CustomTabs
@@ -275,9 +333,27 @@ class Dashboard extends React.Component {
             </Card>
           </GridItem>
         </Grid>
+		
       </div>
     );
   }
+}
+
+// for propType validation of ReplayControl
+ReplayControl.propTypes = {
+  // How many seconds to go back
+  seconds: PropTypes.oneOf([10]),
+}
+
+ForwardControl.propTypes = {
+  // How many seconds to go forward
+  seconds: PropTypes.oneOf([10]),
+
+}
+
+PlaybackRateMenuButton.propTypes = {
+  // The direction where Volume Bar popup
+  rates: PropTypes.array,
 }
 
 Dashboard.propTypes = {
