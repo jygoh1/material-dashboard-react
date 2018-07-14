@@ -13,8 +13,9 @@ import videoStyle from "assets/css/videoStyle.jsx";
 
 const videoURLs = [
 	"https://www.youtube.com/watch?v=ysz5S6PUM-U",
-	"https://www.youtube.com/watch?v=zOmbtZtYOeM",
-	"https://www.youtube.com/watch?v=bW5TODxEmH8&t=1265s",
+	// "https://www.youtube.com/watch?v=zOmbtZtYOeM",
+	// "https://www.youtube.com/watch?v=bW5TODxEmH8&t=1265s",
+	require('assets/vid/output.mp4'),
 	require('assets/vid/airport_static.mp4')
 ];
 

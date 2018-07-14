@@ -80,59 +80,61 @@ class MyRoutes extends React.Component {
 			open2: false,
 			open3: false,
 			selected: null,
-			alertTerminal: 1,
-			alertLevel: 1,
-			alertCamera: 1
+			alertTerminal: 3,
+			alertLevel: 2,
+			alertCamera: 0
 		};
-		this.handleClick1 = this.handleClick1.bind(this);
-		this.handleClick2 = this.handleClick2.bind(this);
-		this.handleClick3 = this.handleClick3.bind(this);
+		// this.handleClick1 = this.handleClick1.bind(this);
+		// this.handleClick2 = this.handleClick2.bind(this);
+		// this.handleClick3 = this.handleClick3.bind(this);
 		this.cameraHasBeenAlerted = this.cameraHasBeenAlerted.bind(this);
 	}
 
-	handleClick1 = () => {
-		this.setState(state => ({
-			open1: !state.open1,
-			alertLevel: null,
+	// handleClick1 = () => {
+		// this.setState(state => ({
+			// open1: !state.open1,
+			// alertLevel: null,
 			// alertCamera: null
-		}));
-		if (this.state.alertTerminal === 1){
-			this.setState(state => ({
-				alertTerminal: null
-			}));
-		}
-	};
+		// }));
+		// if (this.state.alertTerminal === 1){
+			// this.setState(state => ({
+				// alertTerminal: null
+			// }));
+		// }
+	// };
 
-	handleClick2 = () => {
-		this.setState(state => ({
-			open2: !state.open2,
-			alertLevel: null,
+	// handleClick2 = () => {
+		// this.setState(state => ({
+			// open2: !state.open2,
+			// alertLevel: null,
 			// alertCamera: null
-		}));
-		if (this.state.alertTerminal === 2){
-			this.setState(state => ({
-				alertTerminal: null
-			}));
-		}
-	};
+		// }));
+		// if (this.state.alertTerminal === 2){
+			// this.setState(state => ({
+				// alertTerminal: null
+			// }));
+		// }
+	// };
 
-	handleClick3 = () => {
-		this.setState(state => ({
-			open3: !state.open3,
-			alertLevel: null,
+	// handleClick3 = () => {
+		// this.setState(state => ({
+			// open3: !state.open3,
+			// alertLevel: null,
 			// alertCamera: null
-		}));
-		if (this.state.alertTerminal === 3){
-			this.setState(state => ({
-				alertTerminal: null
-			}));
-		}
-	};
+		// }));
+		// if (this.state.alertTerminal === 3){
+			// this.setState(state => ({
+				// alertTerminal: null
+			// }));
+		// }
+	// };
 
-	cameraHasBeenAlerted(){
-		setTimeout(() => { 
-			this.setState(() => ({alertCamera: ""})
-		)}, 500);
+	cameraHasBeenAlerted(terminal, level){
+		if (this.state.alertTerminal === terminal && this.state.alertLevel === level){
+			setTimeout(() => { 
+				this.setState(() => ({alertCamera: null})
+			)}, 500);
+		}
 	}
 	
 	updateSelected(selectedIndex, clickedOnAlert) {
@@ -171,11 +173,12 @@ class MyRoutes extends React.Component {
 		return (
 			<List component="nav">
 			
-				<NavLink to={ this.state.alertTerminal === 1 && this.state.alertLevel === 1 && this.state.alertCamera === null ? "/maps/1/1" : `/maps/1/1/${this.state.alertCamera}` } className={classes.linkStyle} onClick={this.cameraHasBeenAlerted}>
+				<NavLink to={ this.state.alertTerminal === 2 && this.state.alertLevel === 2 && this.state.alertCamera !== null ? `/maps/2/2/${this.state.alertCamera}` :"/maps/2/2" }
+						className={classes.linkStyle} onClick={() => this.cameraHasBeenAlerted(2, 2)}>
 					<ListItem
 						button
-						className={classes.nested + " " + (this.state.alertTerminal === 1 && this.state.alertLevel === 1 ? classes.alert : (this.state.selected === 0 ? classes.blue : ""))}
-						onClick={() => this.updateSelected(0, this.state.alertTerminal === 1 && this.state.alertLevel === 1)}
+						className={classes.nested + " " + (this.state.alertTerminal === 2 && this.state.alertLevel === 2 ? classes.alert : (this.state.selected === 0 ? classes.blue : ""))}
+						onClick={() => this.updateSelected(0, this.state.alertTerminal === 2 && this.state.alertLevel === 2)}
 					>
 						<ListItemIcon className={classes.whiteFont}>
 							<AirportIcon />
@@ -183,52 +186,32 @@ class MyRoutes extends React.Component {
 						<ListItemText className={classes.whiteFont} disableTypography={true} inset primary="T1 L1 - Arrival" />
 					</ListItem>
 				</NavLink>
-				<NavLink to="/maps/1/2/" className={classes.linkStyle}>
+				
+				<NavLink to={ this.state.alertTerminal === 3 && this.state.alertLevel === 1 && this.state.alertCamera !== null ? `/maps/3/1/${this.state.alertCamera}` :"/maps/3/1" }
+						className={classes.linkStyle} onClick={() => this.cameraHasBeenAlerted(3, 1)}>
 					<ListItem
 						button
-						className={classes.nested + " " + (this.state.alertTerminal === 1 && this.state.alertLevel === 2 ? classes.alert : (this.state.selected === 1 ? classes.blue : ""))}
-						onClick={() => this.updateSelected(1, this.state.alertTerminal === 1 && this.state.alertLevel === 2)}
+						className={classes.nested + " " + (this.state.alertTerminal === 3 && this.state.alertLevel === 1 ? classes.alert : (this.state.selected === 1 ? classes.blue : ""))}
+						onClick={() => this.updateSelected(1, this.state.alertTerminal === 3 && this.state.alertLevel === 1)}
 					>
 						<ListItemIcon className={classes.whiteFont}>
 							<AirportIcon />
 						</ListItemIcon>
-						<ListItemText className={classes.whiteFont} disableTypography={true} inset primary="T1 L2 - Departure" />
+						<ListItemText className={classes.whiteFont} disableTypography={true} inset primary="T1 L1 - Arrival" />
 					</ListItem>
 				</NavLink>
-				<NavLink to="/maps/2/1/" className={classes.linkStyle}>
+				
+				<NavLink to={ this.state.alertTerminal === 3 && this.state.alertLevel === 2 && this.state.alertCamera !== null ? `/maps/3/2/${this.state.alertCamera}` :"/maps/3/2" }
+						className={classes.linkStyle} onClick={() => this.cameraHasBeenAlerted(3, 2)}>
 					<ListItem
 						button
-						className={classes.nested + " " + (this.state.alertTerminal === 2 && this.state.alertLevel === 1 ? classes.alert : (this.state.selected === 2 ? classes.blue : ""))}
-						onClick={() => this.updateSelected(2, this.state.alertTerminal === 2 && this.state.alertLevel === 1)}
+						className={classes.nested + " " + (this.state.alertTerminal === 3 && this.state.alertLevel === 2 ? classes.alert : (this.state.selected === 2 ? classes.blue : ""))}
+						onClick={() => this.updateSelected(2, this.state.alertTerminal === 3 && this.state.alertLevel === 2)}
 					>
 						<ListItemIcon className={classes.whiteFont}>
 							<AirportIcon />
 						</ListItemIcon>
-						<ListItemText className={classes.whiteFont} disableTypography={true} inset primary="T2 L1 - Arrival" />
-					</ListItem>
-				</NavLink>
-				<NavLink to="/maps/3/1/" className={classes.linkStyle}>
-					<ListItem
-						button
-						className={classes.nested + " " + (this.state.alertTerminal === 3 && this.state.alertLevel === 1 ? classes.alert : (this.state.selected === 3 ? classes.blue : ""))}
-						onClick={() => this.updateSelected(3, this.state.alertTerminal === 3 && this.state.alertLevel === 1)}
-					>
-						<ListItemIcon className={classes.whiteFont} >
-							<AirportIcon />
-						</ListItemIcon>
-						<ListItemText className={classes.whiteFont} disableTypography={true} inset primary="T3 L1 - Arrival" />
-					</ListItem>
-				</NavLink>
-				<NavLink to="/maps/3/2/" className={classes.linkStyle}>
-					<ListItem
-						button
-						className={classes.nested + " " + (this.state.alertTerminal === 3 && this.state.alertLevel === 2 ? classes.alert : (this.state.selected === 4 ? classes.blue : ""))}
-						onClick={() => this.updateSelected(4, this.state.alertTerminal === 3 && this.state.alertLevel === 2)}
-					>
-						<ListItemIcon className={classes.whiteFont} >
-							<AirportIcon />
-						</ListItemIcon>
-						<ListItemText className={classes.whiteFont} disableTypography={true} inset primary="T3 L2 - Departure" />
+						<ListItemText className={classes.whiteFont} disableTypography={true} inset primary="T1 L1 - Arrival" />
 					</ListItem>
 				</NavLink>
 					

@@ -18,61 +18,57 @@ import NotificationsPage from "views/Notifications/Notifications.jsx";
 
 
 const dashboardRoutes = [
-  {
-    path: "/maps/1/1",
-    sidebarName: "Terminal 1",
-    icon: LocationOn,
-	terminal: 1,
-	level: 1,
+  // {
+    // path: "/maps/1/1",
+    // sidebarName: "Terminal 1",
+    // icon: LocationOn,
+	// terminal: 1,
+	// level: 1,
+    // component: Maps
+  // },
+  // {
+    // path: "/maps/1/1/1",
+    // sidebarName: "Terminal 1",
+    // icon: LocationOn,
+	// terminal: 1,
+	// level: 1,
 	// camera: 0,
-    component: Maps
-  },
+    // component: Maps
+  // },
   {
-    path: "/maps/1/1/1",
-    sidebarName: "Terminal 1",
-    icon: LocationOn,
-	terminal: 1,
-	level: 1,
-	camera: 1,
-    component: Maps
-  },
-  {
-    path: "/maps/1/2",
-    sidebarName: "Terminal 1",
-    icon: LocationOn,
-	terminal: 1,
-	level: 2,
-	// camera: 0,
-    component: Maps
-  },
-  {
-    path: "/maps/2/1",
-    sidebarName: "Terminal 2",
-    icon: LocationOn,
+    path: "/maps/2/2",
+    // sidebarName: "Terminal 1",
+    // icon: LocationOn,
 	terminal: 2,
-	level: 1,
-	// camera: 0,
+	level: 2,
     component: Maps
   },
   {
     path: "/maps/3/1",
-    sidebarName: "Terminal 3",
-    icon: LocationOn,
+    // sidebarName: "Terminal 2",
+    // icon: LocationOn,
 	terminal: 3,
 	level: 1,
-	// camera: 0,
     component: Maps
   },
   {
     path: "/maps/3/2",
-    sidebarName: "Terminal 3",
-    icon: LocationOn,
+    // sidebarName: "Terminal 3",
+    // icon: LocationOn,
 	terminal: 3,
 	level: 2,
-	// camera: 0,
     component: Maps
   },
-  { redirect: true, path: "/", to: "/maps/1/1", navbarName: "Redirect" }
+  {
+    path: "/maps/3/2/0",
+    // sidebarName: "Terminal 3",
+    // icon: LocationOn,
+	terminal: 3,
+	level: 2,
+	camera: 0,
+    component: Maps
+  },
+  { redirect: true, path: "/", to: "/maps/2/2", navbarName: "Redirect" }
 ];
 
 // const dashboardRoutes = [
